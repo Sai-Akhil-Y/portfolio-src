@@ -1,6 +1,6 @@
 # Sai Akhil - Technical Portfolio
 
-[PWA Ready](https://img.shields.io/badge/PWA-Ready-success?style=flat-square)
+![PWA Ready](https://img.shields.io/badge/PWA-Ready-success?style=flat-square)
 
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=flat-square&logo=vite&logoColor=white)
 

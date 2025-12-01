@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sai Akhil Y</title>
+    <link rel="icon" href="./favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                DEFAULT: 'rgb(var(--primary-rgb))', 
+                dim: 'rgba(var(--primary-rgb), 0.1)',
+                glow: 'rgba(var(--primary-rgb), 0.6)',
+                content: 'rgb(var(--text-on-primary))',
+              },
+              /* Semantic Colors for Theming */
+              main: 'rgb(var(--rgb-main) / <alpha-value>)',       // Page Background (Black <-> White)
+              contrast: 'rgb(var(--rgb-contrast) / <alpha-value>)', // Page Text (White <-> Black)
+              'primary-content': 'rgb(var(--text-on-primary))', // Text color on top of Primary (calc. White or Black)
+              
+              glass: {
+                DEFAULT: "rgba(var(--rgb-contrast), 0.03)",
+                hover: "rgba(var(--rgb-contrast), 0.08)",
+                border: "rgba(var(--rgb-contrast), 0.08)",
+              },
+              dark: {
+                DEFAULT: "#000000",
+                lighter: "#050505",
+                card: "rgba(10, 10, 10, 0.8)"
+              }
+            },
+            animation: {
+              'blob': 'blob 7s infinite',
+              'fade-in': 'fadeIn 1s ease-out forwards',
+              'slide-up': 'slideUp 0.8s ease-out forwards',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'text-shimmer': 'textShimmer 3s ease infinite',
+              'spin-slow': 'spin 10s linear infinite',
+              'rainbow': 'rainbow 2s linear infinite',
+              'marquee': 'marquee 60s linear infinite',
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+              textShimmer: {
+                "0%": { backgroundPosition: "0% center" },
+                "100%": { backgroundPosition: "200% center" },
+              },
+              /* Used For Showing Theme Hints */
+              rainbow: {
+                "0%":   { color: "rgb(235, 235, 235)" }, // Muted White
+                "10%":  { color: "rgb(160, 185, 235)" }, // Muted Blue
+                "20%":  { color: "rgb(140, 200, 180)" }, // Muted Emerald
+                "30%":  { color: "rgb(190, 210, 120)" }, // Muted Lime
+                "40%":  { color: "rgb(220, 200, 100)" }, // Muted Yellow
+                "50%":  { color: "rgb(210, 150, 110)" }, // Muted Orange
+                "60%":  { color: "rgb(220, 120, 120)" }, // Muted Red
+                "70%":  { color: "rgb(220, 150, 175)" }, // Muted Pink
+                "80%":  { color: "rgb(170, 150, 210)" }, // Muted Violet
+                "90%":  { color: "rgb(160, 220, 210)" }, // Muted Turquoise
+                "100%": { color: "rgb(235, 235, 235)" }  // Loop back to start
+              },
+              marquee: {
+                "0%": { transform: "translateX(0%)" },
+                "100%": { transform: "translateX(-50%)" },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root {
+        /* Single Source of Truth for Primary Accent Color */
+        /* Matched to MutedColors[0] */
+        --primary-rgb: 170, 150, 210; /* Muted Violet */  
+        
+        /* Calculated Text Color on Primary (Bright background -> Black Text) */
+        --text-on-primary: 0 0 0;
+
+        /* Dark Mode (Default) */
+        --rgb-main: 0 0 0;        /* Black Background */
+        --rgb-contrast: 255 255 255; /* White Text */
+        
+        /* Neutral Colors Defaults (roughly Tailwind defaults) */
+        --neutral-300: #d4d4d4;
+        --neutral-400: #a3a3a3;
+        --neutral-500: #737373;
+        --neutral-800: #262626;
+      }
+      
+      :root.light-mode {
+        /* Light Mode Inversion */
+        --rgb-main: 255 255 255;  /* White Background */
+        --rgb-contrast: 0 0 0;    /* Black Text */
+        
+        /* Adjusted Neutrals for visibility on White */
+        --neutral-300: #404040;
+        --neutral-400: #525252;
+        --neutral-500: #737373; 
+        --neutral-800: #e5e5e5;
+      }
+      
+      /* Overrides for utility classes in light mode */
+      .light-mode .text-neutral-400 { color: var(--neutral-400) !important; }
+      .light-mode .text-neutral-300 { color: var(--neutral-300) !important; }
+      .light-mode .text-neutral-500 { color: var(--neutral-500) !important; }
+
+      /* Register property for smooth gradient rotation */
+      @property --angle {
+        syntax: '<angle>';
+        initial-value: 0deg;
+        inherits: false;
+      }
+
+      body {
+        background-color: rgb(var(--rgb-main));
+        color: rgb(var(--rgb-contrast));
+        overflow-x: hidden;
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgb(var(--rgb-main));
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+        border: 1px solid rgb(var(--rgb-main));
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      
+      .glass-panel {
+        background: rgba(var(--rgb-contrast), 0.03);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(var(--rgb-contrast), 0.08);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        isolation: isolate;
+      }
+      .glass-panel:hover {
+        border-color: rgba(var(--primary-rgb), 0.5);
+        background: rgba(var(--primary-rgb), 0.025);
+        /* Strong glow spread */
+        box-shadow: 0 0 25px rgba(var(--primary-rgb), 0.5);
+      }
+
+      /* Animated Border Logic */
+      .glass-panel.animated-border:hover {
+        box-shadow: none; /* Remove whole card glow during animation to focus on border */
+        border-color: transparent; /* Hide static border */
+      }
+
+      /* 
+        This pseudo-element creates the "beams" of light on the border.
+        It is now applied permanently (not just on :hover), so the beams are 
+        visible and static by default. 
+      */
+      .glass-panel.animated-border:hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+        border-radius: inherit;
+        padding: 1px; /* Border thickness */
+        
+        /* 
+           Conic Gradient for 2 opposite starting points:
+           0-180deg (Beam 1) and 180-360deg (Beam 2)
+        */
+        background: conic-gradient(
+          from var(--angle),
+          transparent 0%,
+          rgba(var(--primary-rgb), 0.2) 10%,
+          rgba(var(--primary-rgb), 0.8) 20%,
+          rgba(var(--primary-rgb), 0.2) 30%,
+          transparent 40%,
+          transparent 50%,
+          rgba(var(--primary-rgb), 0.2) 60%,
+          rgba(var(--primary-rgb), 0.8) 70%,
+          rgba(var(--primary-rgb), 0.2) 80%,
+          transparent 90%
+        );
+        
+        -webkit-mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
+        mask: 
+          linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      
+        animation: borderSpin 9s linear infinite;
+      }
+
+      @keyframes borderSpin {
+        to {
+          --angle: 360deg;
+        }
+      }
+
+      /* Text Gradient Animation */
+      .text-gradient {
+        /* 
+           Updated for Solid Shine Effect:
+           1. No rgba() transparency ensures opacity.
+           2. Central stop uses --rgb-contrast (White in dark mode, Black in light mode) for a strong 'glint'.
+           3. Faster animation (3s).
+        */
+        background: linear-gradient(
+          to right, 
+          rgb(var(--primary-rgb)) 0%, 
+          rgb(var(--primary-rgb)) 20%,
+          rgba(var(--primary-rgb), 0.7) 60%, 
+          rgba(var(--primary-rgb), 0.5) 50%, 
+          rgba(var(--primary-rgb), 0.7) 60%, 
+          rgb(var(--primary-rgb)) 80%, 
+          rgb(var(--primary-rgb)) 100%
+        );
+        background-size: 200% auto;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textShimmer 10s ease infinite;
+      }
+
+      @keyframes textShimmer {
+        to {
+          background-position: 200% center;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
